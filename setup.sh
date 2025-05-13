@@ -1,11 +1,11 @@
 #!/bin/bash
 # Step 1: Define the directory where the code will be stored
-INSTALL_DIR="$HOME/search-word-cli"
+INSTALL_DIR="$HOME/grepword"
 
 # Step 2: Clone the repository if it doesn't already exist
 if [ ! -d "$INSTALL_DIR" ]; then
     echo "Cloning the repository..."
-    git clone https://github.com/yourusername/search-word-cli.git "$INSTALL_DIR"
+    git clone https://github.com/buch2306/grepword.git "$INSTALL_DIR"
 else
     echo "Repository already cloned."
 fi
@@ -24,8 +24,8 @@ mkdir -p "$(dirname "$EXECUTABLE_PATH")"
 echo "Creating executable script at $EXECUTABLE_PATH"
 cat > "$EXECUTABLE_PATH" << 'EOF'
 #!/bin/bash
-# This script runs the search_word_cli Python module
-python3 -m search_word_cli.main "$@"
+# This script runs the grepword Python module
+python3 -m grepword.main "$@"
 EOF
 
 # Make the script executable
@@ -61,13 +61,13 @@ fi
 # Create a symlink to the main Python file in the installation directory
 # This ensures the module can be found regardless of current directory
 echo "Setting up Python module..."
-mkdir -p "$INSTALL_DIR/search_word_cli"
-touch "$INSTALL_DIR/search_word_cli/__init__.py"
+mkdir -p "$INSTALL_DIR/grepword"
+touch "$INSTALL_DIR/grepword/__init__.py"
 
 # If main.py exists but not in the proper module structure, move it
-if [ -f "$INSTALL_DIR/main.py" ] && [ ! -f "$INSTALL_DIR/search_word_cli/main.py" ]; then
+if [ -f "$INSTALL_DIR/main.py" ] && [ ! -f "$INSTALL_DIR/grepword/main.py" ]; then
     echo "Moving main.py to the proper module structure..."
-    cp "$INSTALL_DIR/main.py" "$INSTALL_DIR/search_word_cli/main.py"
+    cp "$INSTALL_DIR/main.py" "$INSTALL_DIR/grepword/main.py"
 fi
 
 echo ""
